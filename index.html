@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Politify</title>
+
+    <meta name="description" content="Angular Material">
+
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="app/assets/app.css"/>
+    <link href="site.css" rel="stylesheet"/>
+
+  </head>
+  <body ng-app="Politify" layout="column"  ng-controller="UserController as vm" ng-cloak>
+
+    <!-- Container 1 -->
+    <md-toolbar layout="row" class="md-whiteframe-z1">
+      <md-button class="menu" ng-click="vm.toggleList()" hide-gt-sm>
+        <md-icon md-svg-icon="app/assets/svg/menu.svg"></md-icon>
+      </md-button>
+      <h1 class="md-toolbar-tools" layout-align-gt-sm="center">Politify</h1>
+    </md-toolbar>
+
+    <!-- Container 2 -->
+    <div class="container" layout="row" flex>
+        <!-- Container 3 -->
+        <md-sidenav
+          layout="column"
+          md-component-id="left"
+          md-is-locked-open="$mdMedia('gt-sm')"
+          class="md-whiteframe-z2">
+          <!-- List item 1 -->
+          <md-list>
+            <md-list-item ng-click="go('home','home');menuToggle();">
+                <i class="material-icons" style="color:black;">home</i> <p style="font-size:18px;color:black;">HOME</p>
+            </md-list-item>
+            <md-divider></md-divider>
+            <md-list-item ng-repeat="item in menuItems" ng-click="go(item.path,item.name);menuToggle();">
+                <p style="font-size:18px;color:white;">{{item.name | uppercase}}</p>
+            </md-list-item>
+        </md-list>
+        </md-sidenav>
+        <!-- Container 4 -->
+        <md-content flex id="content">
+          <!-- List details -->
+          <div flex layout="row">
+            <input type="text" ng-model="politifyCtrl.postcode" placeholder="Enter your postcode">
+            <md-button class="btn" ng-click="politify.Ctrl.doSearch()">Search</md-button>
+          </div>
+
+          <img ng-src="http://www.theyworkforyou.com/{{politifyCtrl.mpResults.image}}"></img>
+            <h3 data-ng-bind="politifyCtrl.mpResults.full_name"></h3>
+            <p data-ng-bind="politifyCtrl.mpResults.party"></p>
+            <p id="constituency" data-ng-bind="politifyCtrl.mpResults.constituency"></p>
+            <p data-ng-bind="politifyCtrl.mpResults.office[0].dept"></p>
+
+
+
+          <md-icon md-svg-icon="{{vm.selected.avatar}}" class="avatar"></md-icon>
+            <h2>{{vm.selected.name}}</h2>
+            <p>{{vm.selected.content}}</p>
+
+          <md-button class="share" md-no-ink ng-click="vm.makeContact(vm.selected)">
+            <md-icon md-svg-icon="app/assets/svg/share.svg"></md-icon>
+          </md-button>
+        </md-content>
+    </div>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-aria.min.js"></script>
+    <script src="https://rawgit.com/angular/bower-material/master/angular-material.min.js"></script> -->
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="app/controllers/politifyController.js"></script>
+    <script src="app/controllers/mpSearchFactory.js"></script>
+    <script src="app/controllers/newsApiFactory.js"></script>
+    <script src="app/controllers/Users.js"></script>
+    <script src="app/controllers/UserController.js"></script>
+    <script src="app/controllers/UserService.js"></script>
+    <script src="app/controllers/contactSheet.js"></script>
+
+    <!-- <script type="text/javascript">
+
+    </script> -->
+
+  </body>
+</html>
